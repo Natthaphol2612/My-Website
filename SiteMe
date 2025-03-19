@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ฟอร์มรายงานปัญหาที่ปรับแต่งเพิ่มเติม</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input, textarea, select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+
+        .file-upload input {
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>ฟอร์มรายงานปัญหาที่ปรับแต่งเพิ่มเติม</h2>
+        <form action="/submit-form" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+            
+            <label for="name">ชื่อ-นามสกุล</label>
+            <input type="text" id="name" name="name" required>
+            <span id="name-error" class="error"></span>
+
+            <label for="email">อีเมล</label>
+            <input type="email" id="email" name="email" required>
+            <span id="email-error" class="error"></span>
+
+            <label for="problem">คำอธิบายปัญหา</label>
+            <textarea id="problem" name="problem" rows="4" required></textarea>
+            <span id="problem-error" class="error"></span>
+
+            <label for="severity">ความรุนแรงของปัญหา</label>
+            <select id="severity" name="severity">
+                <option value="low">ต่ำ</option>
+                <option value="medium">ปานกลาง</option>
+                <option value="high">สูง</option>
+            </select>
+
+            <label for="date">วันที่พบปัญหา</label>
+            <input type="date" id="date" name="date">
+
+            <div class="file-upload">
+                <label for="file">อัปโหลดไฟล์ (ถ้ามี)</label>
+                <input type="file" id="file" name="file">
+            </div>
+
+            <button type="submit">ส่งรายงาน</button>
+        </form>
+    </div>
+
+    <script>
+        // ฟังก์ชันตรวจสอบฟอร์ม
+        function validateForm() {
+            let isValid = true;
+
+            // การตรวจสอบชื่อ
+            let name = document.getElementById("name").value;
+            if (name == "") {
+                document.getElementById("name-error").textContent = "กรุณากรอกชื่อ-นามสกุล";
+                isValid = false;
+            } else {
+                document.getElementById("name-error").textContent = "";
+            }
+
+            // การตรวจสอบอีเมล
+            let email = document.getElementById("email").value;
+            if (email == "") {
+                document.getElementById("email-error").textContent = "กรุณากรอกอีเมล";
+                isValid = false;
+            } else {
+                document.getElementById("email-error").textContent = "";
+            }
+
+            // การตรวจสอบคำอธิบายปัญหา
+            let problem = document.getElementById("problem").value;
+            if (problem == "") {
+                document.getElementById("problem-error").textContent = "กรุณากรอกคำอธิบายปัญหา";
+                isValid = false;
+            } else {
+                document.getElementById("problem-error").textContent = "";
+            }
+
+            return isValid;
+        }
+    </script>
+</body>
+</html>
